@@ -1,10 +1,15 @@
 <?php
 include '../config/connect_DB.php';
+
+header("Access-Control-Allow-Origin: *");
+$input_data = file_get_contents("php://input");
 $return = array();
 $return['data_user'] = array();
-	if (count($_GET) == 2 && isset($_GET['user']) && isset($_GET['password'])) {
-		$user = $_GET['user'];
-		$password = $_GET['password'];
+$_POST = json_decode($input_data,true);
+
+	if (count($_POST) == 2 && isset($_POST['user']) && isset($_POST['password'])) {
+		$user = $_POST['user'];
+		$password = $_POST['password'];
 	
 	}
 	$select = "SELECT * FROM `register` WHERE `user`='{$user}' AND `password` ='{$password}' ";
@@ -27,7 +32,7 @@ $return['data_user'] = array();
 else{
 
 				$return['status'] = false;
-				$return['message'] = "error";
+				$return['message'] = "ไม่สามารถติดต่อกับระบบได้";
 }
 		
 		echo json_encode($return);
