@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 $data = file_get_contents("php://input");
 $return = array();
 $_POST = json_decode($data,true);
-exec("echo{$data }>>log2.txt");
+// exec("echo{$data }>>log2.txt");
 		if( isset($_POST['name_store'])&&isset($data))
 		{
 				$name_store = $_POST['name_store'];
@@ -30,7 +30,7 @@ exec("echo{$data }>>log2.txt");
 				$name_img = "img/".uniqid().".jpg";
 				$file_content = file_put_contents($name_img,$base_64);
 
-				$select = "SELECT * FROM `technician_store` WHERE `name_store` = '{$name_store}'";
+				$select = "SELECT * FROM `technician_store` WHERE `name_store` = '{$name_store}'AND `lat`='{$lat}' AND `lng`='{$lng}'";
 					if ($res = mysqli_query($connection,$select)) {
 						if (mysqli_num_rows($res)>0) {
 							$return['message'] = "มีผู้ใช้แล้ว";
@@ -38,7 +38,7 @@ exec("echo{$data }>>log2.txt");
 						}
 						else{
 							$insert = "INSERT INTO `technician_store` (`id`, `name_store`, `ref_type`, `ref_area`, `account bank`, `image_name`,`home_number`, `street`, `district`, `time_start`, `time_end`, `tel_technician`, `cost_begin`, `lat`, `lng`) 
-							VALUES (NULL, '{$name_store}', '{$equipment}', '{$area}','{$account}','{$num_house}','{$street}','{$name_img}','{$distric}','{$time_start}','{$time_end}','{$tel}','{$cost_begin}','{$lat}','{$lng}') ";
+							VALUES (NULL, '{$name_store}', '{$equipment}', '{$area}','{$account}','{$name_img}','{$num_house}','{$street}','{$distric}','{$time_start}','{$time_end}','{$tel}','{$cost_begin}','{$lat}','{$lng}') ";
 							if (mysqli_query($connection,$insert)) {	
 								$return['message'] = "สมัคสมาชิกสำเร็จ";
 								$return['status'] = true;
