@@ -12,7 +12,7 @@ $_POST = json_decode($input_data,true);
 		$password = $_POST['password'];
 	
 	}
-	$select = "SELECT * FROM `register` WHERE `user`='{$user}' AND `password` ='{$password}' ";
+	$select = "SELECT * FROM `register`  WHERE `user`='{$user}' AND `password`='{$password}'";
 	if ($res = mysqli_query($connection,$select)) {
 		
 		if (mysqli_num_rows($res) == 1) {

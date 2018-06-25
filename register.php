@@ -14,6 +14,7 @@ $_POST = json_decode($data,true);
 				$status = $_POST['status'];
 	}
 		$select = "SELECT * FROM `register` WHERE `user`='{$user}' AND `password` ='{$password}'";
+
 		if ($res = mysqli_query($connection,$select)) {
 			if (mysqli_num_rows($res)>0) {
 				$return['message'] = "มีผู้ใช้รหัสผ่านนี้แล้ว";

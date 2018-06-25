@@ -14,6 +14,7 @@ else{
 
 
 $select = "SELECT 
+technician_store.id,
 technician_store.name_store, 
 technician_store.`account bank`, 
 technician_store.home_number, 
@@ -26,15 +27,22 @@ technician_store.tel_technician,
 technician_store.cost_begin, 
 technician_store.lat, 
 technician_store.lng, 
+technician_store.ref_type,
+technician_store.ref_area,
 technician_type.type_name, 
-area_bangkok.area_name 
+area_bangkok.area_name,
+technician_store.ref_regis_tec
+
 FROM `technician_store` INNER JOIN technician_type ON technician_store.ref_type = technician_type.id 
-INNER JOIN area_bangkok ON technician_store.ref_area = area_bangkok.id 
+INNER JOIN area_bangkok ON technician_store.ref_area = area_bangkok.id  
 {$new_where}";
+
 
     if($res = mysqli_query($connection,$select)){
         while($row = mysqli_fetch_assoc($res)){
+                
 
+                $row["star"] = get_star($row['id'],$connection);
                 $detail[] = $row;
         }
 
@@ -45,4 +53,20 @@ INNER JOIN area_bangkok ON technician_store.ref_area = area_bangkok.id
     
     }
     echo json_encode($detail);
+
+function get_star($tec_id,$connection){
+
+    $select = "SELECT AVG(`rating`) AS star FROM complacent WHERE `ref_tec`='{$tec_id}'" ;
+    $star = 0;
+    if($res = mysqli_query($connection,$select)){
+        while($row = mysqli_fetch_assoc($res)){         
+            $star = round($row["star"]*1);
+        }
+
+    }
+    
+    return $star;
+}
 ?>
+
+
