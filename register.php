@@ -3,8 +3,6 @@ include '../config/connect_DB.php';
 header("Access-Control-Allow-Origin: *");
 $data = file_get_contents("php://input");
 $return = array();
-// $return = json_decode($data,true);
-// var_dump($data);
 $_POST = json_decode($data,true);
 
 
@@ -13,7 +11,8 @@ $_POST = json_decode($data,true);
 				$password = $_POST['password'];
 				$status = $_POST['status'];
 	}
-		$select = "SELECT * FROM `register` WHERE `user`='{$user}' AND `password` ='{$password}'";
+
+		$select = "SELECT * FROM `register` WHERE `user`='{$user}' AND `password` ='{$password}' AND `status` = '{$status}'";
 
 		if ($res = mysqli_query($connection,$select)) {
 			if (mysqli_num_rows($res)>0) {
