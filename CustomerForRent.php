@@ -26,24 +26,8 @@ $details = [];
             $qury_insert = mysqli_query($connection,$insert);
             $details['message'] = "จองสำเร็จ";
             $details['status'] = true;
-        //     if (mysqli_num_rows($res)<0) {
-        //         // $details['message'] = "ไม่สามารถทำการจองได้";
-        //         // $details['status'] = false;
-        //         $details['message'] = "จองสำเร็จ";
-        //         $details['status'] = true;
-        // }
 
-
-        //     else{
-
-
-        //         $insert = "INSERT INTO `customerforrent` (`id`, `name`, `lastname`,`equipment` ,`house_number`, `street`, `distric`, `area`, `tel`, `date of service`, `ref_tec`, `ref_regis`) 
-        //         VALUES (NULL,'{$name_guest}', '{$last_name_guest}','{$equipment}', '{$num_house}', '{$street}', '{$dristric}', '{$area}', '{$tel}', '{$date}', '{$ref_tec}', '{$ref_regis}');";
-        //     $qury_insert = mysqli_query($connection,$insert);
-        //     $details['message'] = "จองสำเร็จ";
-        //     $details['status'] = true;
             
-        //     }
         }
        
        else{
