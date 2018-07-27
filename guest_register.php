@@ -13,7 +13,6 @@ if(isset($_POST['guest_name'])){
     $guest_street = $_POST['guest_street'];
     $guest_distric = $_POST['guest_distric'];
     $guest_area = $_POST['guest_area'];
-    $ref_guest = $_POST['ref_guest'];
 
     $user = $_POST['user'];
     $password = $_POST['password'];
@@ -27,10 +26,7 @@ if($res = mysqli_query($connection,$select)){
         $detail['status'] = false;
     }
     else{
-        // $insert_guest_password ="INSERT INTO 
-        // `register` (`id`, `user`, `password`, `status`) 
-        // VALUES (NULL, '{$user}', '{$password}', '$status') ";//$insert_password
-        // $query_insert = mysqli_query($connection,$insert_guest_password);
+
         $insert_guest_details = "INSERT INTO 
         `guest_register`(`id`, `guest_name`, `guest_lastname`, `guest_tel`, `guest_num_house`, `guest_street`, `guest_distric`, `guest_area`,`ref_guest`) 
         VALUES (null,'{$guest_name}','{$guest_lastname}','{$guest_tel}','{$guest_num_house}','{$guest_street}','{$guest_distric}','{$guest_area}','{$ref_guest}')";
