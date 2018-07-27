@@ -29,10 +29,8 @@ $_POST = json_decode($input_data,true);
 		}
 }
  elseif($status == 2){
-
-	$tec_select= "SELECT * FROM `technician_store` WHERE `username`='{$user}' AND `password`='{$password}' AND `status` = '{$status}'";
+	$tec_select="SELECT * FROM `register` WHERE `user`='{$user}' AND `password`='{$password}' AND `status` = '{$status}'";
 	$quer_tec = mysqli_query($connection,$tec_select);
-
 			if(mysqli_num_rows($quer_tec) == 1){
 				$data = mysqli_fetch_assoc($quer_tec);
 				$return['data_user'] = $data;
