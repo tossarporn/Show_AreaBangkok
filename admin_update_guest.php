@@ -14,9 +14,11 @@ if(isset($_POST['guest_id'])){
     $guest_street = $_POST['guest_street'];
     $guest_distric = $_POST['guest_distric'];
     $guest_area = $_POST['guest_area'];
+    $guest_username = $_POST['guest_username'];
+    $guest_password = $_POST['guest_password'];
 }
 
-$select_guest = "SELECT `id` FROM `guest_register` WHERE `id`='{$guest_id}'";
+$select_guest = "SELECT * FROM `guest_register` WHERE `id`='{$guest_id}'";
 
 if($res = mysqli_query($connection,$select_guest)){
     if(mysqli_num_rows($res) !=1){
@@ -24,12 +26,10 @@ if($res = mysqli_query($connection,$select_guest)){
         $detail['status'] = false;
     }
     else{
-
-        $update_guest = "UPDATE `guest_register` 
-        SET `guest_name`='{$guest_name}',`guest_lastname`='{$guest_lastname}',`guest_tel`='{$guest_tel}',
-        `guest_num_house`='{$guest_num_house}',`guest_street`='{$guest_street}',
-        `guest_distric`='{$guest_distric}',`guest_area`='{$guest_area}' 
-        WHERE `id` ='{$guest_id}'";
+        $update_guest = "UPDATE `guest_register` SET `username`='{$guest_username}',`password`='{$guest_password}',`guest_name`='{$guest_name}',
+        `guest_lastname`='{$guest_lastname}',`guest_tel`='{$guest_tel}',`guest_num_house`='{$guest_num_house}',`guest_street`='{$guest_street}',
+        `guest_distric`='{$guest_distric}',`guest_area`='{$guest_area}'  WHERE `id` ='{$guest_id}'";  
+        $detail['message'] = "อัพเดตสำเร็จ";
         $detail['status'] = true;  
         $query = mysqli_query($connection,$update_guest);
     }
@@ -39,6 +39,7 @@ else{
 }
 echo json_encode($detail);
 mysqli_close($connection);
+
 
 
 ?>

@@ -3,7 +3,7 @@ include '../config/connect_DB.php';
 header("Access-Control-Allow-Origin: *");
 $data = file_get_contents("php://input");
 $_POST = json_decode($data,true);
-$detail = [];
+// $detail = [];
    $month['data_month'] = array (
             
             ["num_month"=>'01',"month"=>'มกราคม'],

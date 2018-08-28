@@ -38,10 +38,24 @@ $_POST = json_decode($input_data,true);
 				$return['message'] = "ยินดีต้อนรับเข้าสู่ระบบ";
 			}
 			else{
-				$return['data_user'] = array();
 			$return['status'] = false;
 			$return['message'] = "ไม่มีผู้ใช้อยู่ในระบบ";
 			}
+	}
+
+	elseif($status == 3){
+		$admin_select=" SELECT * FROM `details_admin` WHERE `user_admin`='{$user}' AND `password_admin`='{$password}' AND `status` = '{$status}'";
+		$quer_admin = mysqli_query($connection,$admin_select);
+				if(mysqli_num_rows($quer_admin) == 1){
+					$data = mysqli_fetch_assoc($quer_admin);
+					$return['data_user'] = $data;
+					$return['status'] = true;
+					$return['message'] = "ยินดีต้อนรับเข้าสู่ระบบ";
+				}
+				else{
+				$return['status'] = false;
+				$return['message'] = "ไม่มีผู้ใช้อยู่ในระบบ";
+				}
 	}
 	
 	else{

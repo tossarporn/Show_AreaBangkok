@@ -19,5 +19,4 @@ JOIN technician_type ON technician_type.id = technician_store.ref_type";
             $detail['message'] = 'ไม่สามารถติดต่อกับข้อมูลได้';
         }
         echo json_encode($detail);
-    
 ?>
