@@ -18,8 +18,8 @@ $_POST = json_decode($data,true);
 				$street = $_POST['street'];
 				$distric = $_POST['distric'];
 				$area = $_POST['area'];//ref_area
-				$lat = $_POST['lat'];
-				$lng = $_POST['lng'];
+				// $lat = $_POST['lat'];
+				// $lng = $_POST['lng'];
 				$tec_id = $_POST['tec_id'];
 				$img = str_replace('data:image/jpg;base64,','',$_POST["images"]);
 				$img = str_replace('','+',$img);
@@ -27,23 +27,25 @@ $_POST = json_decode($data,true);
 				$name_img = "img/".uniqid().".jpg";
 				$file_content = file_put_contents($name_img,$base_64);
 
-				$select = "SELECT * FROM `technician_store` WHERE technician_store.name_store = '{$name_store}' AND technician_store.lat ='{$lat}' AND technician_store.lng='{$lng}'";
+				$select = "SELECT * FROM `technician_store` WHERE name_store = '{$name_store}'";
 					if ($res = mysqli_query($connection,$select)) {
 						if (mysqli_num_rows($res)>0) {
 							$return['message'] = "มีผู้ใช้แล้ว";
 							$return['status'] = false;
 						}
 						else{
-							$insert = "INSERT INTO `technician_store` (`id`, `name_store`, `ref_type`, `ref_area`, `ref_regis_tec`, `account bank`, `image_name`,`home_number`, `street`, `district`, `time_start`, `time_end`, `tel_technician`, `cost_begin`, `lat`, `lng`) 
-							VALUES (NULL, '{$name_store}', '{$equipment}', '{$area}','{$tec_id}','{$account}','{$name_img}','{$num_house}','{$street}','{$distric}','{$time_start}','{$time_end}','{$tel}','{$cost_begin}','{$lat}','{$lng}') ";
-							if (mysqli_query($connection,$insert)) {	
+							$insert ="INSERT INTO `technician_store` (`id`, `name_store`, `ref_type`, `ref_area`, `ref_regis_tec`, `account_bank`, `home_number`, `street`, `district`, `image_name`, `time_start`, `time_end`, `tel_technician`, `cost_begin`) 
+							VALUES (NULL,'{$name_store}', '{$equipment}', '{$area}','{$tec_id}','{$account}','{$num_house}','{$street}','{$distric}','{$name_img}','{$time_start}','{$time_end}','{$tel}','{$cost_begin}')";
+								mysqli_query($connection,$insert);
 								$return['message'] = "สร้างร้านค้าสำเร็จ";
 								$return['status'] = true;
-							}
 						}
 				}
+				else{
+								$return['message'] = "ไม่สามารถติดต่อข้อมูลได้";
+								$return['status'] = false;
+				}
 		}
-		
 	echo json_encode($return);
 	mysqli_close($connection);
 
