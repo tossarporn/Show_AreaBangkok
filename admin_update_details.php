@@ -32,9 +32,6 @@ if($query_update = mysqli_query($connection,$select)){
      $detail['message'] = "อัพเดตสำเร็จ";
      $detail['status'] = true;
      $query = mysqli_query($connection,$update_admin);
-     echo $update_admin;
-
-
     }
 }
 else{

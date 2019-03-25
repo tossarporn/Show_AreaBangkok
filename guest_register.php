@@ -29,7 +29,7 @@ if($res = mysqli_query($connection,$select)){
 
         $insert_guest_details = "INSERT INTO 
          `guest_register` (`id`, `username`, `password`, `status`, `guest_name`, `guest_lastname`, `guest_tel`, `guest_num_house`, `guest_street`, `guest_distric`, `guest_area`)  
-        VALUES (NULL,'{$guest_name}','{$guest_lastname}','{$status}','{$guest_name}','{$guest_lastname}','{$guest_tel}','{$guest_num_house}','{$guest_street}','{$guest_distric}','{$guest_area}')";
+        VALUES (NULL,'{$user}','{$password}','{$status}','{$guest_name}','{$guest_lastname}','{$guest_tel}','{$guest_num_house}','{$guest_street}','{$guest_distric}','{$guest_area}')";
                 $detail['message'] = "สมัคสมาชิกสำเร็จ";
                 $detail['status'] = true;   
         $query = mysqli_query($connection,$insert_guest_details);
