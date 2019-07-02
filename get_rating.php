@@ -22,7 +22,7 @@ $rating['data_rating'] = array (
 
         $select = "SELECT COUNT(*) AS count_star,rating  
         FROM complacent 
-        WHERE `ref_id`='{$ref_id}' GROUP BY rating asc "  ;
+        WHERE `ref_tec`='{$ref_id}' GROUP BY rating asc "  ;
 
         if($res = mysqli_query($connection,$select)){
             while ($row = mysqli_fetch_assoc($res)){

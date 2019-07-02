@@ -40,7 +40,7 @@ INNER JOIN area_bangkok ON technician_store.ref_area = area_bangkok.id
         while($row = mysqli_fetch_assoc($res)){
                 
 
-                $row["star"] = get_star($row['id'],$connection);
+                $row["star"] = get_star($row['ref_regis_tec'],$connection);
                 $detail[] = $row;
         }
 
@@ -58,7 +58,7 @@ function get_star($tec_id,$connection){
     $star = 0;
     if($res = mysqli_query($connection,$select)){
         while($row = mysqli_fetch_assoc($res)){         
-            $star = round($row["star"]*1);
+            $star =  round($row["star"]*1);
         }
 
     }

@@ -30,7 +30,7 @@ foreach ($month['data_month'] as $key => $data_month) {
    
     $sql = "SELECT count(*) as count_number
     FROM `customerforrent` 
-    WHERE `date of service` LIKE '{$_POST['date_service']}-{$data_month["num_month"]}%' and `ref_id_tec` ='{$ref_id_tec}'" ;
+    WHERE `date_service` LIKE '{$_POST['date_service']}-{$data_month["num_month"]}%' and `ref_id_tec` ='{$ref_id_tec}'" ;
 
     
     if($res = mysqli_query($connection,$sql)){

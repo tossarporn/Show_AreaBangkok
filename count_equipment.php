@@ -33,7 +33,7 @@ FROM `customerforrent`
 WHERE
 `equipment` LIKE'{$count_equipment}%'
 AND
-`date of service` LIKE'{$date_service}-{$data_month["num_month"]}%'
+`date_service` LIKE'{$date_service}-{$data_month["num_month"]}%'
 AND 
 `ref_id_tec` = '{$ref_id_tec}'" ;
 

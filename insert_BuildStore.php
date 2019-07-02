@@ -8,6 +8,10 @@ $_POST = json_decode($data,true);
 		if( isset($_POST['name_store'])&&isset($data))
 		{
 				$name_store = $_POST['name_store'];
+				$name_tech = $_POST['name_tech'];
+				$lastname_tech = $_POST['lastname_tech'];
+				$name_account = $_POST['name_account'];
+				$lastname_account = $_POST['lastname_account'];
 				$account = $_POST['account'];
 				$equipment = $_POST['equipment'];//ref_type 
 				$tel = $_POST['tel'];
@@ -34,8 +38,8 @@ $_POST = json_decode($data,true);
 							$return['status'] = false;
 						}
 						else{
-							$insert ="INSERT INTO `technician_store` (`id`, `name_store`, `ref_type`, `ref_area`, `ref_regis_tec`, `account_bank`, `home_number`, `street`, `district`, `image_name`, `time_start`, `time_end`, `tel_technician`, `cost_begin`) 
-							VALUES (NULL,'{$name_store}', '{$equipment}', '{$area}','{$tec_id}','{$account}','{$num_house}','{$street}','{$distric}','{$name_img}','{$time_start}','{$time_end}','{$tel}','{$cost_begin}')";
+							$insert ="INSERT INTO `technician_store` (`id`, `name_store`,`name_tech`,`lastname_tech`,`ref_type`, `ref_area`, `ref_regis_tec`,`name_account`,`lastname_account`, `account_bank`, `home_number`, `street`, `district`, `image_name`, `time_start`, `time_end`, `tel_technician`, `cost_begin`) 
+							VALUES (NULL,'{$name_store}','{$name_tech}','{$lastname_tech}','{$equipment}', '{$area}','{$tec_id}','{$name_account}','{$lastname_account}','{$account}','{$num_house}','{$street}','{$distric}','{$name_img}','{$time_start}','{$time_end}','{$tel}','{$cost_begin}')";
 								mysqli_query($connection,$insert);
 								$return['message'] = "สร้างร้านค้าสำเร็จ";
 								$return['status'] = true;

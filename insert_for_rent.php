@@ -5,34 +5,31 @@ $data = file_get_contents("php://input");
 $_POST = json_decode($data,true);
 $detail = [];
 
-        if(count($_POST) == 4 && isset($_POST['ref_tec']) && ($_POST['ref_regis']) && ($_POST['ref_id_tec']) && ($_POST['status_seg']))
+        if(isset($_POST['id_store']) && isset($_POST['ref_tec']))
         {
-           
-            // $ref_regis = $_POST['name'];
-            // $ref_id_tec = $_POST['lastname'];
-            // $status_seg = $_POST['equipment'];
-            // $ref_tec = $_POST['house_number'];
-            // $ref_regis = $_POST['street'];
-            // $ref_id_tec = $_POST['distric'];
-            // $status_seg = $_POST['tel'];
-            // $ref_tec = $_POST['area'];
-            // $ref_tec = $_POST['date of service'];
-
+            $guest_name = $_POST['guest_name'];
+            $guest_lastname = $_POST['guest_lastname'];
+            $type_name = $_POST['type_name'];
+            $home_number = $_POST['home_number'];
+            $street = $_POST['street'];
+            $district = $_POST['district'];
+            $area_name = $_POST['area_name'];
+            $tel = $_POST['tel'];
+            $mydate = $_POST['mydate'];
+            $id_store = $_POST['id_store'];
+            $ref_regis = $_POST['ref_regis'];
             $ref_tec = $_POST['ref_tec'];
-			$ref_regis = $_POST['ref_regis'];
-			$ref_id_tec = $_POST['ref_id_tec'];
-            $status_seg = $_POST['status_seg'];
+            $check_tus = $_POST['check_tus'];
         }
-            $select = "SELECT `ref_tec`,`ref_regis`,`ref_id_tec`,`status_seg` FROM `customerforrent` 
-            WHERE `ref_tec`='{$ref_tec}'AND`ref_regis`='{$ref_regis}' AND`ref_id_tec`='{$ref_id_tec}' AND `status_seg`='{$status_seg}'";
-        
-            if($res = mysqli_query($connection,$select)){
-                
-                $insert_rent = "INSERT INTO `customerforrent` (`ref_tec`, `ref_regis`, `ref_id_tec`, `status_seg`) 
-                VALUES ('$ref_tec', '$ref_regis', '$ref_id_tec', '$status_seg');";
-                 $qury_insert = mysqli_query($connection,$insert_rent);
+            $select = "SELECT * FROM `customerforrent` INNER JOIN guest_register ON customerforrent.ref_regis = guest_register.id  WHERE guest_register.id = '{$ref_regis}'";
+            if($res = mysqli_query($connection,$select)){   
+                $update_rent = "UPDATE `guest_register` SET `check_tus`='{$check_tus}',`ref_store`='{$id_store}'WHERE `id`='{$ref_regis}'"; 
+                 $insert_rent = "INSERT INTO `customerforrent` (`id`, `name`, `lastname`, `equipment`, `house_number`, `street`, `distric`, `area`, `tel`, `date_service`, `ref_tec`, `ref_regis`, `ref_id_tec`) 
+                 VALUES (NULL, '$guest_name', '$guest_lastname', '$type_name', '$home_number', '$street', '$district', '$area_name', '$tel', '$mydate', '$id_store', '$ref_regis', '$ref_tec');";
                 $detail['message'] = "เพิ่มข้อมูลสำเร็จ";
-				$detail['status'] = true;
+                $detail['status'] = true;
+                $qury_insert = mysqli_query($connection,$update_rent);
+                $qury_insert = mysqli_query($connection, $insert_rent);
             }
             else{
                 $detail['message'] = "เพิ่มข้อมูลล้มเหลว";

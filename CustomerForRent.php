@@ -20,7 +20,8 @@ $details = [];
             $status_seg = $_POST['status_seg'];
             $check_tus = $_POST['check_tus'];
         }
-        $select="SELECT * FROM `customerforrent` INNER JOIN register ON customerforrent.ref_regis = register.id";
+        $select="SELECT * FROM `customerforrent` INNER JOIN guest_register ON customerforrent.ref_regis = guest_register.id  WHERE guest_register.id = '{$ref_regis}'
+        ";
 
         if($res = mysqli_query($connection,$select)){
             
@@ -30,19 +31,14 @@ $details = [];
             // $details['message'] = "จองสำเร็จ";
             // $details['status'] = true;
 
-            // $insert = "INSERT INTO `customerforrent` (`id`, `name`, `lastname`, `equipment`, `house_number`, `street`, `distric`, `tel`, `area`, `date of service`, `ref_tec`, `ref_regis`, `ref_id_tec`,`status_seg`) 
-            // VALUES (NULL, '$name_guest', '$last_name_guest', '$equipment', '$num_house', '$street', '$dristric', '$tel', '$area ', ' $date', '$ref_tec', '$ref_regis', '$ref_id_tec','$status_seg');";
-            //   $qury_insert = mysqli_query($connection,$insert);
-            //   $details['message'] = "จองสำเร็จ";
-            //   $details['status'] = true;
-
-        $update_guest = "UPDATE `customerforrent` SET `name`='{$name_guest}',`lastname`='{$last_name_guest}',
-        `equipment`='{$equipment}',`house_number`='{$num_house}',`street`='{$street}',`distric`='{$dristric}',
-        `tel`='{$tel}',`area`='{$area}',`date of service`='{$date}',`ref_tec`='{$ref_tec}',
-        `ref_regis`='{$ref_regis}',`ref_id_tec`='{$ref_id_tec}',`status_seg`='{$status_seg}',`check_tus`='{$check_tus}' WHERE `ref_regis` ='{$ref_regis}'";
+           
+            $update_details = "UPDATE `guest_register` SET `status_seg`='{$status_seg}',`check_tus`='{$check_tus}'  WHERE guest_register.id = '{$ref_regis}'";
+            $insert_details = "INSERT INTO `customerforrent` (`id`, `name`, `lastname`, `equipment`, `house_number`, `street`, `distric`, `tel`, `area`, `date_service`, `ref_tec`, `ref_regis`, `ref_id_tec`) 
+            VALUES (NULL, '$name_guest', '$last_name_guest', '$equipment', '$num_house', '$street', '$dristric', '$tel', '$area ', ' $date', '$ref_tec', '$ref_regis', '$ref_id_tec');";
                 $details['message'] = "จองสำเร็จ";
                 $details['status'] = true;
-                $query = mysqli_query($connection,$update_guest);
+                $query = mysqli_query($connection,$update_details);
+                $query = mysqli_query($connection,$insert_details);
         }
        
        else{
